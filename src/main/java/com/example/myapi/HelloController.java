@@ -10,4 +10,10 @@ public class HelloController {
     public String hello() {
         return "Hello, World!";
     }
+
+    @GetMapping("/user")
+    public User getUser(){
+        return new User("谢晨", 57, "IT工程师");
+    }
+
 }
