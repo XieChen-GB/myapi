@@ -2,6 +2,7 @@ package com.example.myapi;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -40,4 +41,18 @@ public class HelloController {
         return users.get(id);
     }
 
+    @GetMapping("users/search")
+    public User searchUser(@RequestParam String name){
+        List<User> users = new ArrayList<>();
+        users.add(new User("谢晨", 57, "IT工程师"));
+        users.add(new User("田中", 30, "Java开发者"));
+        users.add(new User("山田", 25, "前端工程师"));
+        
+        for( User u : users){
+            if(u.getName().equals(name)){
+                return u;
+            }        
+        }
+        return null;
+    }
 }
