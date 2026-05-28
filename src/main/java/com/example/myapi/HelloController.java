@@ -1,6 +1,7 @@
 package com.example.myapi;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -27,6 +28,16 @@ public class HelloController {
         users.add(new User("山田", 25, "前端工程师"));
 
         return users;
+    }
+
+    @GetMapping("/users/{id}")
+    public User getUserById(@PathVariable int id){
+        List<User> users = new ArrayList<>();
+        users.add(new User("谢晨", 57, "IT工程师"));
+        users.add(new User("田中", 30, "Java开发者"));
+        users.add(new User("山田", 25, "前端工程师"));
+
+        return users.get(id);
     }
 
 }
