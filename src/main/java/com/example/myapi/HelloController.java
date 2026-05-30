@@ -1,5 +1,6 @@
 package com.example.myapi;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,9 @@ import java.util.List;
 @RestController
 public class HelloController {
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("/hello")
     public String hello() {
         return "Hello, World!";
@@ -20,15 +24,15 @@ public class HelloController {
 
     @GetMapping("/user")
     public User getUser(){
-        return new User("谢晨", 57, "IT工程师");
+        return new User("003561","谢晨", 57, "IT工程师");
     }
 
     @GetMapping("/users")
     public List<User> getUsers(){
         List<User> users = new ArrayList<>();
-        users.add(new User("谢晨",57,"工程师"));
-        users.add(new User("田中", 30, "Java开发者"));
-        users.add(new User("山田", 25, "前端工程师"));
+        users.add(new User("003561","谢晨",57,"工程师"));
+        users.add(new User("003562","田中", 30, "Java开发者"));
+        users.add(new User("003563","山田", 25, "前端工程师"));
 
         return users;
     }
@@ -36,9 +40,9 @@ public class HelloController {
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable int id){
         List<User> users = new ArrayList<>();
-        users.add(new User("谢晨", 57, "IT工程师"));
-        users.add(new User("田中", 30, "Java开发者"));
-        users.add(new User("山田", 25, "前端工程师"));
+        users.add(new User("003561","谢晨", 57, "IT工程师"));
+        users.add(new User("003562","田中", 30, "Java开发者"));
+        users.add(new User("003563","山田", 25, "前端工程师"));
 
         return users.get(id);
     }
@@ -46,9 +50,9 @@ public class HelloController {
     @GetMapping("users/search")
     public User searchUser(@RequestParam String name){
         List<User> users = new ArrayList<>();
-        users.add(new User("谢晨", 57, "IT工程师"));
-        users.add(new User("田中", 30, "Java开发者"));
-        users.add(new User("山田", 25, "前端工程师"));
+        users.add(new User("003561","谢晨", 57, "IT工程师"));
+        users.add(new User("003562","田中", 30, "Java开发者"));
+        users.add(new User("003563","山田", 25, "前端工程师"));
         
         for( User u : users){
             if(u.getName().equals(name)){
@@ -60,7 +64,7 @@ public class HelloController {
 
     @PostMapping("/users")
     public User creatUser(@RequestBody User user){
-        return  user;
+        return  userRepository.save(user);
     }
 
 }
